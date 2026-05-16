@@ -149,6 +149,56 @@ describe("route-args", () => {
       ]),
     ).toEqual({
       path: "update.channel",
+      dryRun: false,
+      json: false,
+      allowExec: false,
+    });
+    expect(
+      parseConfigUnsetRouteArgs([
+        "node",
+        "openclaw",
+        "config",
+        "unset",
+        "--dry-run",
+        "update.channel",
+      ]),
+    ).toEqual({
+      path: "update.channel",
+      dryRun: true,
+      json: false,
+      allowExec: false,
+    });
+    expect(
+      parseConfigUnsetRouteArgs([
+        "node",
+        "openclaw",
+        "config",
+        "unset",
+        "--dry-run",
+        "--json",
+        "update.channel",
+      ]),
+    ).toEqual({
+      path: "update.channel",
+      dryRun: true,
+      json: true,
+      allowExec: false,
+    });
+    expect(
+      parseConfigUnsetRouteArgs([
+        "node",
+        "openclaw",
+        "config",
+        "unset",
+        "--dry-run",
+        "--allow-exec",
+        "update.channel",
+      ]),
+    ).toEqual({
+      path: "update.channel",
+      dryRun: true,
+      json: false,
+      allowExec: true,
     });
     expect(parseConfigGetRouteArgs(["node", "openclaw", "config", "get", "--json"])).toBeNull();
   });

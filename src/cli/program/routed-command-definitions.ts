@@ -120,7 +120,14 @@ export const routedCommandDefinitions = {
     parseArgs: parseConfigUnsetRouteArgs,
     runParsedArgs: async (args) => {
       const { runConfigUnset } = await loadConfigCli();
-      await runConfigUnset(args);
+      await runConfigUnset({
+        path: args.path,
+        cliOptions: {
+          dryRun: args.dryRun,
+          json: args.json,
+          allowExec: args.allowExec,
+        },
+      });
     },
   }),
   "models-list": defineRoutedCommand({

@@ -344,7 +344,10 @@ describe("program routes", () => {
     await expect(
       route.run(["node", "openclaw", "--profile", "work", "config", "unset", "update.channel"]),
     ).resolves.toBe(true);
-    expect(runConfigUnsetMock).toHaveBeenCalledWith({ path: "update.channel" });
+    expect(runConfigUnsetMock).toHaveBeenCalledWith({
+      path: "update.channel",
+      cliOptions: { dryRun: false, json: false, allowExec: false },
+    });
   });
 
   it("passes config get path when root value options appear after subcommand", async () => {
@@ -369,7 +372,10 @@ describe("program routes", () => {
     await expect(
       route.run(["node", "openclaw", "config", "unset", "--profile", "work", "update.channel"]),
     ).resolves.toBe(true);
-    expect(runConfigUnsetMock).toHaveBeenCalledWith({ path: "update.channel" });
+    expect(runConfigUnsetMock).toHaveBeenCalledWith({
+      path: "update.channel",
+      cliOptions: { dryRun: false, json: false, allowExec: false },
+    });
   });
 
   it("returns false for config get route when unknown option appears", async () => {
